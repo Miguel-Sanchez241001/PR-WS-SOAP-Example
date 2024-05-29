@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/web-service-soap"
+           xmlns:tns="http://example.com/web-service-soap"
+           elementFormDefault="qualified">
+
+    <!-- Definición del tipo complexType para Account -->
+    <xs:complexType name="Account">
+        <xs:sequence>
+            <xs:element name="accountReference" type="xs:string"/>
+            <xs:element name="customerName" type="xs:string"/>
+            <xs:element name="accountBalance" type="xs:decimal"/>
+            <xs:element name="lastBillAmount" type="xs:decimal"/>
+            <xs:element name="lastBillDueDate" type="xs:long"/>
+            <xs:element name="currencyId" type="xs:int"/>
+            <xs:element name="currencyIsoCode" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definición del tipo complexType para ExternalPayment -->
+    <xs:complexType name="ExternalPayment">
+        <xs:sequence>
+            <xs:element name="paymentDate" type="xs:long"/>
+            <xs:element name="collectionReference" type="xs:string"/>
+            <xs:element name="amount" type="xs:decimal"/>
+            <xs:element name="currency" type="xs:string"/>
+            <xs:element name="transactionId" type="xs:string"/>
+            <xs:element name="paymentCenter" type="xs:string"/>
+            <xs:element name="collectionId" type="xs:int"/>
+            <xs:element name="cancelMessage" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definición del tipo complexType para ExternalPaymentResponse -->
+    <xs:complexType name="ExternalPaymentResponse">
+        <xs:sequence>
+            <xs:element name="collectionId" type="xs:long"/>
+            <xs:element name="confirmationMessage" type="xs:string"/>
+            <xs:element name="collectionStatus" type="xs:string"/>
+            <xs:element name="accountBalance" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definición del elemento raíz para la operación getAccount -->
+    <xs:element name="getAccountRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cuenta" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Definición del elemento raíz para la respuesta de la operación getAccount -->
+    <xs:element name="getAccountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="account" type="tns:Account"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Definición del elemento raíz para la operación processExternalPayment -->
+    <xs:element name="processExternalPaymentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="externalPayment" type="tns:ExternalPayment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Definición del elemento raíz para la respuesta de la operación processExternalPayment -->
+    <xs:element name="processExternalPaymentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="externalPaymentResponse" type="tns:ExternalPaymentResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
